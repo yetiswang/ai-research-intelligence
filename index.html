@@ -168,13 +168,14 @@ b,strong{color:#fff;font-weight:700}
 
 
 /* ============ reading mode: phones and portrait tablets ============ */
-body.read{overflow:auto;height:auto;-webkit-text-size-adjust:100%}
+html:has(body.read){overflow-x:hidden}
+body.read{overflow-x:hidden;overflow-y:auto;height:auto;-webkit-text-size-adjust:100%;touch-action:pan-y pinch-zoom}
 body.read #viewport{position:static;overflow:visible}
 body.read #stage{position:static;width:auto;height:auto;transform:none!important;overflow:visible;background:none}
 body.read #bgs,body.read .veil{position:fixed;inset:0}
 body.read .bg{inset:0}
 body.read .bg.on{animation:none}
-body.read .slide{position:relative;inset:auto;opacity:1;visibility:visible;padding:64px 20px 56px;border-bottom:1px solid rgba(255,255,255,.08)}
+body.read .slide{position:relative;inset:auto;opacity:1;visibility:visible;padding:64px 20px 88px;border-bottom:1px solid rgba(255,255,255,.08)}
 body.read .step{opacity:1;transform:none;filter:none}
 body.read .foot,body.read #progress,body.read #hint,body.read #overview{display:none!important}
 body.read .kicker{font-size:12px;margin-bottom:10px}
@@ -265,6 +266,17 @@ body.read #b3 .site .cap{padding:14px 10px 8px}
 body.read #b3 .site h3{font-size:19px}
 body.read #b3 .site .url{font-size:14px}
 body.read #b3 .site li{font-size:15px;margin:6px 0 0 20px}
+#pager{display:none}
+body.read #pager{display:flex;position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;align-items:center;gap:4px;
+  padding:4px;border-radius:999px;background:rgba(24,18,44,.55);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.18),0 10px 30px rgba(0,0,0,.35);font:600 14px var(--font);color:#fff}
+body.read #pager button{width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:#fff;font-size:24px;line-height:1;cursor:pointer}
+body.read #pager button:active{background:rgba(255,255,255,.16)}
+body.read #pgNum{min-width:74px;text-align:center;font-variant-numeric:tabular-nums}
+body.read #pgNum.hint{min-width:150px}
+body.read .slide{scroll-margin-top:0;overflow-x:clip}
+body.read .slide.swipe-in{animation:swipeIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes swipeIn{from{transform:translateX(var(--sx,30px));opacity:.4}to{transform:none;opacity:1}}
 /* in reading mode the sites show as screenshots with a link */
 body.read .inner iframe{display:none}
 body.read .inner .fallback{opacity:1}
@@ -475,6 +487,7 @@ body.read .inner .fallback{opacity:1}
 </div></div>
 
 <div id="overview"></div>
+<div id="pager" aria-live="polite"><button id="pgPrev" aria-label="Previous slide">‹</button><span id="pgNum">1 / 8</span><button id="pgNext" aria-label="Next slide">›</button></div>
 <div id="hint">← → navigate · N notes · G overview · F offline view</div>
 
 <script>
@@ -527,9 +540,9 @@ function show(i,s=0){
   slides[cur].querySelectorAll('iframe[data-src]').forEach(loadFrame);
   onEnter(slides[cur]);setHash(cur);broadcast();
 }
-function next(){if(READ){scrollToSlide(cur+1);return}const s=slides[cur];if(sub<maxSub(s)){sub++;applySub(s,sub);broadcast()}else if(cur<slides.length-1)show(cur+1,0)}
-function prev(){if(READ){scrollToSlide(cur-1);return}const s=slides[cur];if(sub>0){sub--;applySub(s,sub);broadcast()}else if(cur>0){const p=cur-1;show(p,maxSub(slides[p]))}}
-function scrollToSlide(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:'smooth',block:'start'})}
+function next(){if(READ){goRead(cur+1,1);return}const s=slides[cur];if(sub<maxSub(s)){sub++;applySub(s,sub);broadcast()}else if(cur<slides.length-1)show(cur+1,0)}
+function prev(){if(READ){goRead(cur-1,-1);return}const s=slides[cur];if(sub>0){sub--;applySub(s,sub);broadcast()}else if(cur>0){const p=cur-1;show(p,maxSub(slides[p]))}}
+function scrollToSlide(i){i=Math.max(0,Math.min(slides.length-1,i));const y=slides[i].getBoundingClientRect().top+scrollY;scrollTo({top:y,left:0,behavior:'smooth'})}
 
 addEventListener('keydown',e=>{
   if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();next()}
@@ -563,6 +576,21 @@ addEventListener('blur',()=>setTimeout(reclaim,0));
 document.querySelectorAll('.inner iframe').forEach(f=>{f.setAttribute('tabindex','-1');f.addEventListener('load',()=>setTimeout(reclaim,50))});
 setInterval(()=>{if(!READ)reclaim()},1000);
 
+/* reading mode pager and swipe: left/right jumps a slide, up/down scrolls as usual */
+function label(i){return slides[i].classList.contains('bk')?('B'+(i-MAIN+1)):(i+1)+' / '+MAIN}
+function updatePager(){const n=document.getElementById('pgNum');if(n&&!n.classList.contains('hint'))n.textContent=label(cur)}
+function goRead(i,dir){i=Math.max(0,Math.min(slides.length-1,i));if(i===cur&&dir)return;const t=slides[i];
+  t.style.setProperty('--sx',(dir>0?40:-40)+'px');t.classList.remove('swipe-in');void t.offsetWidth;if(dir)t.classList.add('swipe-in');
+  cur=i;scrollToSlide(i);updatePager();setHash(i)}
+document.getElementById('pgPrev').addEventListener('click',()=>goRead(cur-1,-1));
+document.getElementById('pgNext').addEventListener('click',()=>goRead(cur+1,1));
+let sx=null,sy=null,st=0;
+addEventListener('touchstart',e=>{if(!READ||e.touches.length>1||e.target.closest('.scrollx,#pager'))return;sx=e.touches[0].clientX;sy=e.touches[0].clientY;st=Date.now()},{passive:true});
+addEventListener('touchend',e=>{if(!READ||sx===null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;
+  if(Math.abs(dx)>55&&Math.abs(dx)>1.6*Math.abs(dy)&&Date.now()-st<800){dx<0?goRead(cur+1,1):goRead(cur-1,-1)}},{passive:true});
+function pagerHint(){const n=document.getElementById('pgNum');if(!n)return;n.classList.add('hint');n.textContent='Swipe ‹ › for slides';
+  setTimeout(()=>{n.classList.remove('hint');updatePager()},2600)}
+
 /* reading mode: slides animate in as they scroll into view; the background follows the slide in view */
 let io=null;
 function enterRead(){
@@ -571,9 +599,9 @@ function enterRead(){
   document.querySelectorAll('.inner iframe').forEach(f=>{if(f.src){f.removeAttribute('src')}});
   io=new IntersectionObserver(es=>es.forEach(en=>{const s=en.target;
     if(en.isIntersecting&&!s.classList.contains('active')){s.classList.add('active');onEnter(s)}
-    if(en.isIntersecting&&en.intersectionRatio>=.35){cur=slides.indexOf(s);slides.forEach((x,k)=>x._bg.classList.toggle('on',k===cur))}
+    if(en.isIntersecting&&en.intersectionRatio>=.35){cur=slides.indexOf(s);slides.forEach((x,k)=>x._bg.classList.toggle('on',k===cur));updatePager()}
   }),{threshold:[.15,.35]});
-  slides.forEach(s=>io.observe(s));
+  slides.forEach(s=>io.observe(s));updatePager();pagerHint();
 }
 function enterPresent(){
   document.body.classList.remove('read');if(io){io.disconnect();io=null}
