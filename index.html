@@ -120,6 +120,7 @@ b,strong{color:#fff;font-weight:700}
 /* S6 engine */
 #s6 .wrap{display:grid;grid-template-columns:980px 1fr;gap:60px;margin-top:34px;align-items:center}
 #s6 svg.engine{width:980px;height:700px;overflow:visible}
+#s6 .engine-list{display:none}
 #s6 .gains{display:flex;flex-direction:column;gap:26px}
 #s6 .gain{padding:32px 38px}
 #s6 .gain h3{font-size:36px;color:#fff;line-height:1.15}
@@ -153,7 +154,9 @@ b,strong{color:#fff;font-weight:700}
 #b3 .site .inner{position:relative;height:430px;border-radius:18px;overflow:hidden;background:#0b0916}
 #b3 .site .cap{padding:26px 22px 18px}
 #b3 .site h3{font-size:32px;color:#fff}
-#b3 .site .url{font-size:20px;color:var(--coral-lt);margin-top:4px}
+#b3 .site .url{display:inline-block;font-size:20px;color:var(--coral-lt);margin-top:4px;text-decoration:none}
+.urlbar{text-decoration:none}
+.scrollx{min-width:0}
 #b3 .site li{font-size:23px;margin:10px 0 0 24px;line-height:1.4}
 
 /* overview grid (G) and help */
@@ -162,6 +165,109 @@ b,strong{color:#fff;font-weight:700}
 #overview .tile{aspect-ratio:16/9;border-radius:12px;background-size:cover;background-position:center;position:relative;cursor:pointer;border:2px solid transparent;display:flex;align-items:flex-end;padding:14px;font-size:18px;color:#fff;font-weight:600;text-shadow:0 2px 8px #000}
 #overview .tile.cur{border-color:var(--coral)}
 #hint{position:fixed;right:18px;bottom:14px;font:13px var(--font);color:rgba(255,255,255,.35);z-index:21}
+
+
+/* ============ reading mode: phones and portrait tablets ============ */
+body.read{overflow:auto;height:auto;-webkit-text-size-adjust:100%}
+body.read #viewport{position:static;overflow:visible}
+body.read #stage{position:static;width:auto;height:auto;transform:none!important;overflow:visible;background:none}
+body.read #bgs,body.read .veil{position:fixed;inset:0}
+body.read .bg{inset:0}
+body.read .bg.on{animation:none}
+body.read .slide{position:relative;inset:auto;opacity:1;visibility:visible;padding:64px 20px 56px;border-bottom:1px solid rgba(255,255,255,.08)}
+body.read .step{opacity:1;transform:none;filter:none}
+body.read .foot,body.read #progress,body.read #hint,body.read #overview{display:none!important}
+body.read .kicker{font-size:12px;margin-bottom:10px}
+body.read h1{font-size:40px}
+body.read h2{font-size:27px;line-height:1.18}
+body.read p,body.read li{font-size:17px;line-height:1.5}
+body.read .glass{border-radius:18px}
+body.read .glass.pad{padding:22px 22px}
+body.read .chip{font-size:14px;padding:9px 16px;gap:8px}
+/* 1 */
+body.read #s1{min-height:88vh;display:flex;flex-direction:column;justify-content:center}
+body.read #s1 .titlewrap{position:static;width:auto}
+body.read #s1 h1{font-size:46px}
+body.read #s1 .sub{font-size:21px;margin-top:14px}
+body.read #s1 .who{margin-top:28px;gap:10px}
+body.read #s1 .orb{position:absolute;right:-60px;top:30px;width:240px;height:240px;opacity:.5}
+/* 2 */
+body.read #s2 .cols{grid-template-columns:1fr;gap:10px;margin-top:22px}
+body.read #s2 .net{width:100%;height:auto;margin-top:6px}
+body.read #s2 .quote{font-size:19px;margin-top:16px}
+/* 3 */
+body.read #s3 .grid6{grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+body.read #s3 .q{padding:16px;min-height:0;flex-direction:column;align-items:flex-start;gap:10px}
+body.read #s3 .q svg{flex:0 0 34px;width:34px;height:34px}
+body.read #s3 .q .t{font-size:18px}
+body.read #s3 .q .s{font-size:14px}
+body.read #s3 .tag{font-size:12px;margin-top:26px}
+body.read #s3 .calc{grid-template-columns:1fr;gap:12px;margin-top:12px}
+body.read #s3 .calc .glass{padding:18px 20px;gap:14px}
+body.read #s3 .calc svg{flex:0 0 34px;width:34px;height:34px}
+body.read #s3 .calc p{font-size:17px}
+/* 4 */
+body.read #s4 .track{height:auto;margin-top:22px}
+body.read #s4 .rail{display:none}
+body.read #s4 .begins{position:static;width:auto;text-align:left;font-size:12px;margin:0 0 12px}
+body.read #s4 .stops{position:static;grid-template-columns:1fr;gap:12px}
+body.read #s4 .stop{flex-direction:row;align-items:flex-start;text-align:left;gap:14px}
+body.read #s4 .dot{flex:0 0 40px;width:40px;height:40px;margin-top:14px;font-size:18px}
+body.read #s4 .stop .card{margin-top:0;min-height:0;padding:16px 18px}
+body.read #s4 .stop h3{font-size:19px;margin-bottom:6px}
+body.read #s4 .stop p{font-size:15px}
+/* 5 */
+body.read #s5 .demo{grid-template-columns:1fr;height:auto;gap:14px;margin-top:22px}
+body.read #s5 .frame{padding:8px;height:auto}
+body.read #s5 .frame .inner{height:auto;aspect-ratio:16/9}
+body.read #s5 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+body.read #s5 .stat{padding:16px 18px}
+body.read #s5 .stat .n{font-size:40px}
+body.read #s5 .stat .l{font-size:14px}
+body.read #s5 .stat.names .n{font-size:17px}
+body.read .urlbar{right:10px;bottom:10px;font-size:13px;padding:7px 12px}
+/* 6 */
+body.read #s6 .wrap{grid-template-columns:1fr;gap:16px;margin-top:14px}
+body.read .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -20px;padding:0 20px}
+body.read #s6 .scrollx{display:none}
+body.read #s6 .engine-list{display:block;list-style:none}
+body.read #s6 .engine-list li{font-size:16px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+body.read #s6 .engine-list li:last-child{border-bottom:0}
+body.read #s6 .gains{gap:12px}
+body.read #s6 .gain{padding:18px 20px}
+body.read #s6 .gain h3{font-size:20px}
+body.read #s6 .gain p{font-size:15px;margin-top:6px}
+/* 7 */
+body.read #s7 .cols{grid-template-columns:1fr;gap:12px;margin-top:22px}
+body.read #s7 .lesson{padding:18px 20px;min-height:0;gap:14px}
+body.read #s7 .lesson .k{flex:0 0 34px;height:34px;font-size:16px}
+body.read #s7 .lesson h3{font-size:19px}
+body.read #s7 .lesson p{font-size:15px}
+body.read #s7 .next{flex-direction:column;align-items:flex-start;gap:8px;padding:18px 20px;margin-top:14px}
+body.read #s7 .next .lab{font-size:12px}
+body.read #s7 .next p{font-size:16px}
+/* 8 */
+body.read #s8{min-height:70vh}
+body.read #s8 .center{position:static;min-height:60vh}
+body.read #s8 h1{font-size:52px}
+body.read #s8 .links{margin-top:26px;gap:10px}
+/* backups */
+body.read #b1 svg{width:1100px;height:auto;margin-top:14px}
+body.read #b2 .tiers{grid-template-columns:1fr;gap:12px;margin-top:22px}
+body.read #b2 .tier{min-height:0;padding:20px 22px}
+body.read #b2 .tier .lvl{font-size:12px}
+body.read #b2 .tier h3{font-size:20px;margin:8px 0 10px}
+body.read #b2 .tier li{font-size:15px;margin:0 0 6px 20px}
+body.read #b3 .sites{grid-template-columns:1fr;gap:16px;margin-top:22px}
+body.read #b3 .site{padding:8px}
+body.read #b3 .site .inner{height:auto;aspect-ratio:16/9}
+body.read #b3 .site .cap{padding:14px 10px 8px}
+body.read #b3 .site h3{font-size:19px}
+body.read #b3 .site .url{font-size:14px}
+body.read #b3 .site li{font-size:15px;margin:6px 0 0 20px}
+/* in reading mode the sites show as screenshots with a link */
+body.read .inner iframe{display:none}
+body.read .inner .fallback{opacity:1}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01s!important}
@@ -262,8 +368,8 @@ b,strong{color:#fff;font-weight:700}
     <div class="glass frame in d2" id="demoFrame">
       <div class="inner">
         <div class="fallback" style="background-image:url(assets/sdl-map-2026-09-26.png)"></div>
-        <iframe data-src="https://sdl-map.discoverylabs.nl/" title="Global self-driving lab map" loading="eager" allow="fullscreen"></iframe>
-        <span class="glass chip urlbar">sdl-map.discoverylabs.nl</span>
+        <iframe data-src="https://sdl-map.discoverylabs.nl/" data-eager="1" title="Global self-driving lab map" loading="eager" allow="fullscreen"></iframe>
+        <a class="glass chip urlbar" href="https://sdl-map.discoverylabs.nl/" target="_blank" rel="noopener">sdl-map.discoverylabs.nl</a>
       </div>
     </div>
     <div class="stats">
@@ -281,7 +387,14 @@ b,strong{color:#fff;font-weight:700}
   <div class="kicker in">3 · What I gain</div>
   <h2 class="in d1">A research intelligence engine, always ready.</h2>
   <div class="wrap">
-    <svg class="engine in d2" id="engine" viewBox="0 0 980 700"></svg>
+    <div class="scrollx"><svg class="engine in d2" id="engine" viewBox="0 0 980 700"></svg></div>
+    <ul class="engine-list glass pad in d2">
+      <li><b>Global SDL map</b> · 118 initiatives</li>
+      <li><b>Literature knowledge base</b> · 845 papers</li>
+      <li><b>Monthly field radar</b> · new work, every month</li>
+      <li><b>Deep-research briefs</b> · a group, a topic, a country</li>
+      <li><b>Policy and funding watch</b> · RAISE, MaterialsCommons</li>
+    </ul>
     <div class="gains">
       <div class="glass gain step"><h3>Always ready</h3><p>An up-to-date answer before every meeting, call or proposal.</p></div>
       <div class="glass gain step"><h3>A mental model in itself</h3><p>One shared picture of who does what, where, and with which means.</p></div>
@@ -323,7 +436,7 @@ b,strong{color:#fff;font-weight:700}
  data-notes="For experienced colleagues. The agent is Claude Code, working with a web-search tool. Findings go into one JSON data file in a GitHub repository, one record per lab. A static Astro site builds the map, list and timeline in four languages and publishes to GitHub Pages. The literature side runs from Zotero through text extraction into a knowledge base of linked notes in Obsidian. Scheduled jobs on my laptop run the radar, the watch and the backups, and a few MCP connectors let different AI agents read the same knowledge base.">
   <div class="kicker in">Backup · How it is built</div>
   <h2 class="in d1">How the map and the knowledge base are built.</h2>
-  <svg id="tech" class="in d2" viewBox="0 0 1680 720"></svg>
+  <div class="scrollx"><svg id="tech" class="in d2" viewBox="0 0 1680 720"></svg></div>
 </section>
 
 <!-- B2 DATA -->
@@ -346,12 +459,12 @@ b,strong{color:#fff;font-weight:700}
   <div class="sites">
     <div class="glass site in d2">
       <div class="inner"><div class="fallback" style="background-image:url(assets/dlnl.png)"></div><iframe data-src="https://discoverylabs.nl/" title="DiscoveryLabNL"></iframe></div>
-      <div class="cap"><h3>DiscoveryLabNL briefing site</h3><div class="url">discoverylabs.nl</div>
+      <div class="cap"><h3>DiscoveryLabNL briefing site</h3><a class="url" href="https://discoverylabs.nl/" target="_blank" rel="noopener">discoverylabs.nl</a>
         <ul><li>Pillars, stakeholder map and roadmap on one page</li><li>Opened live in meetings, link sent afterwards</li><li>Updated the same day when something changes</li></ul></div>
     </div>
     <div class="glass site in d3">
       <div class="inner"><div class="fallback" style="background-image:url(assets/flagship.png)"></div><iframe data-src="https://tue-flagship-advanced-materials.nl/" title="TU/e Flagship Advanced Materials"></iframe></div>
-      <div class="cap"><h3>TU/e Flagship Advanced Materials</h3><div class="url">tue-flagship-advanced-materials.nl</div>
+      <div class="cap"><h3>TU/e Flagship Advanced Materials</h3><a class="url" href="https://tue-flagship-advanced-materials.nl/" target="_blank" rel="noopener">tue-flagship-advanced-materials.nl</a>
         <ul><li>Vision, mission and milestones in one place</li><li>Shared context for internal audiences</li><li>Sets out the ambition for AI and lab automation in materials research</li></ul></div>
     </div>
   </div>
@@ -372,19 +485,21 @@ const bgs=document.getElementById('bgs');
 const MAIN=slides.filter(s=>!s.classList.contains('bk')).length;
 let cur=0, sub=0;
 
-/* scale 1920x1080 stage to the window */
-function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(-50%,-50%) scale(${s})`}
-addEventListener('resize',fit);fit();
+/* two modes: 'present' (16:9 stage, keys, steps) and 'read' (phones and portrait tablets: stacked, scrolled) */
+const q=new URLSearchParams(location.search);
+function wantRead(){if(q.get('mode')==='present')return false;if(q.get('mode')==='read')return true;
+  return innerWidth<760||(innerWidth<1100&&innerHeight>innerWidth)}
+let READ=null;
+function fit(){if(READ)return;const k=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(-50%,-50%) scale(${k})`}
 
 /* backgrounds */
 slides.forEach((s,i)=>{const d=document.createElement('div');d.className='bg';d.style.backgroundImage=`url(${s.dataset.bg})`;bgs.appendChild(d);s._bg=d});
 
-/* load iframes early so the demo is warm */
-document.querySelectorAll('iframe[data-src]').forEach(f=>{f.src=f.dataset.src});
-/* render each site at desktop width and scale it into its frame, so its own layout stays centred */
-function fitFrames(){document.querySelectorAll('.inner iframe').forEach(f=>{const box=f.parentElement;const w=box.offsetWidth,h=box.offsetHeight;
+/* embedded sites: render at desktop width and scale into the frame, so each site keeps its own centred layout.
+   Only the map loads up front; the backup sites load when their slide opens. None load in reading mode. */
+function loadFrame(f){if(!READ&&!f.src)f.src=f.dataset.src}
+function fitFrames(){if(READ)return;document.querySelectorAll('.inner iframe').forEach(f=>{const box=f.parentElement;const w=box.offsetWidth,h=box.offsetHeight;if(!w)return;
   const DW=+(f.dataset.dw||1600);const k=w/DW;f.style.width=DW+'px';f.style.height=(h/k)+'px';f.style.transform=`scale(${k})`})}
-fitFrames();addEventListener('load',fitFrames);
 function setOffline(on){document.querySelectorAll('.inner').forEach(x=>x.classList.toggle('offline',on))}
 if(!navigator.onLine)setOffline(true);
 addEventListener('offline',()=>setOffline(true));
@@ -396,11 +511,12 @@ function applySub(s,n){steps(s).forEach((e,i)=>e.classList.toggle('shown',(+(e.d
   if(s.id==='s4'){document.getElementById('rail').style.width=(n/5*100)+'%'}}
 
 /* notes channel for the presenter window */
-const ch=('BroadcastChannel' in window)?new BroadcastChannel('ai-ri-notes'):null;
-function broadcast(){if(!ch)return;const s=slides[cur];const nx=slides[cur+1];
+let ch=null;try{ch=('BroadcastChannel' in window)?new BroadcastChannel('ai-ri-notes'):null}catch(e){ch=null}
+function broadcast(){if(!ch||READ)return;const s=slides[cur];const nx=slides[cur+1];
   ch.postMessage({i:cur,n:slides.length,sub,max:maxSub(s),title:s.dataset.title,notes:s.dataset.notes,next:nx?nx.dataset.title:'End'})}
 if(ch)ch.onmessage=e=>{if(e.data==='hello')broadcast();if(e.data==='next')next();if(e.data==='prev')prev()};
 
+function setHash(i){try{history.replaceState(null,'',location.pathname+location.search+'#'+(i+1))}catch(e){/* Safari can refuse on file:// */}}
 function show(i,s=0){
   i=Math.max(0,Math.min(slides.length-1,i));
   slides.forEach((x,k)=>{x.classList.toggle('active',k===i);x._bg.classList.toggle('on',k===i)});
@@ -408,14 +524,17 @@ function show(i,s=0){
   const bk=slides[cur].classList.contains('bk');
   document.getElementById('num').textContent=bk?('B'+(cur-MAIN+1)):(cur+1);
   document.getElementById('progress').style.width=bk?'100%':((cur+1)/MAIN*100)+'%';
-  onEnter(slides[cur]);history.replaceState(null,'','#'+(cur+1));broadcast();
+  slides[cur].querySelectorAll('iframe[data-src]').forEach(loadFrame);
+  onEnter(slides[cur]);setHash(cur);broadcast();
 }
-function next(){const s=slides[cur];if(sub<maxSub(s)){sub++;applySub(s,sub);broadcast()}else if(cur<slides.length-1)show(cur+1,0)}
-function prev(){const s=slides[cur];if(sub>0){sub--;applySub(s,sub);broadcast()}else if(cur>0){const p=cur-1;show(p,maxSub(slides[p]))}}
+function next(){if(READ){scrollToSlide(cur+1);return}const s=slides[cur];if(sub<maxSub(s)){sub++;applySub(s,sub);broadcast()}else if(cur<slides.length-1)show(cur+1,0)}
+function prev(){if(READ){scrollToSlide(cur-1);return}const s=slides[cur];if(sub>0){sub--;applySub(s,sub);broadcast()}else if(cur>0){const p=cur-1;show(p,maxSub(slides[p]))}}
+function scrollToSlide(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:'smooth',block:'start'})}
 
 addEventListener('keydown',e=>{
   if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();next()}
   else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();prev()}
+  else if(READ)return;
   else if(e.key==='Home')show(0);else if(e.key==='End')show(MAIN-1);
   else if(e.key==='n'||e.key==='N')openNotes();
   else if(e.key==='g'||e.key==='G')toggleOverview();
@@ -423,12 +542,48 @@ addEventListener('keydown',e=>{
   else if(e.key==='Escape')document.getElementById('overview').classList.remove('on');
   else if(/^[1-9]$/.test(e.key))show(+e.key-1);
 });
-stage.addEventListener('click',e=>{if(e.target.closest('iframe'))return;if(e.clientX>innerWidth*0.25)next();else prev()});
+stage.addEventListener('click',e=>{if(READ||e.target.closest('iframe,a'))return;if(e.clientX>innerWidth*0.25)next();else prev()});
+/* swipe in presenting mode (tablet in landscape) */
+let tx=null;
+stage.addEventListener('touchstart',e=>{if(!READ)tx=e.touches[0].clientX},{passive:true});
+stage.addEventListener('touchend',e=>{if(READ||tx===null)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>50){dx<0?next():prev()}},{passive:true});
 
-/* specular highlight follows the pointer */
-addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect();
-  document.querySelectorAll('.slide.active .glass').forEach(g=>{const b=g.getBoundingClientRect();
-    g.style.setProperty('--mx',((e.clientX-b.left)/b.width*100)+'%');g.style.setProperty('--my',((e.clientY-b.top)/b.height*100)+'%')})});
+/* specular highlight follows the pointer, once per frame */
+let pm=null;
+addEventListener('pointermove',e=>{if(READ||e.pointerType==='touch')return;const first=!pm;pm=e;if(!first)return;requestAnimationFrame(()=>{const ev=pm;pm=null;
+  document.querySelectorAll('.slide.active .glass').forEach(g=>{const b=g.getBoundingClientRect();if(!b.width)return;
+    g.style.setProperty('--mx',((ev.clientX-b.left)/b.width*100)+'%');g.style.setProperty('--my',((ev.clientY-b.top)/b.height*100)+'%')})})});
+
+/* embedded sites may grab keyboard focus when they load; take it back unless the pointer is inside that frame */
+let overFrame=false;
+function reclaim(){const a=document.activeElement;if(a&&a.tagName==='IFRAME'&&!overFrame){a.blur();window.focus()}}
+document.querySelectorAll('.inner').forEach(w=>{w.addEventListener('mouseenter',()=>overFrame=true);
+  w.addEventListener('mouseleave',()=>{overFrame=false;setTimeout(reclaim,0)})});
+addEventListener('blur',()=>setTimeout(reclaim,0));
+document.querySelectorAll('.inner iframe').forEach(f=>{f.setAttribute('tabindex','-1');f.addEventListener('load',()=>setTimeout(reclaim,50))});
+setInterval(()=>{if(!READ)reclaim()},1000);
+
+/* reading mode: slides animate in as they scroll into view; the background follows the slide in view */
+let io=null;
+function enterRead(){
+  document.body.classList.add('read');stage.style.transform='';
+  slides.forEach(s=>{s.classList.remove('active');applySub(s,maxSub(s))});
+  document.querySelectorAll('.inner iframe').forEach(f=>{if(f.src){f.removeAttribute('src')}});
+  io=new IntersectionObserver(es=>es.forEach(en=>{const s=en.target;
+    if(en.isIntersecting&&!s.classList.contains('active')){s.classList.add('active');onEnter(s)}
+    if(en.isIntersecting&&en.intersectionRatio>=.35){cur=slides.indexOf(s);slides.forEach((x,k)=>x._bg.classList.toggle('on',k===cur))}
+  }),{threshold:[.15,.35]});
+  slides.forEach(s=>io.observe(s));
+}
+function enterPresent(){
+  document.body.classList.remove('read');if(io){io.disconnect();io=null}
+  document.querySelectorAll('iframe[data-eager]').forEach(loadFrame);
+  fit();fitFrames();show(cur,0);
+}
+function applyMode(){const r=wantRead();if(r===READ){fit();fitFrames();return}READ=r;
+  if(READ){enterRead();FS=1.7}else{FS=1;enterPresent()}
+  if(document.querySelector('#s2.active'))drawNet();}
+addEventListener('resize',applyMode);addEventListener('load',fitFrames);
 
 /* per-slide entrance effects */
 function onEnter(s){
@@ -440,6 +595,7 @@ function onEnter(s){
 function count(el){const to=+el.dataset.count,suf=el.dataset.suffix||'';const t0=performance.now(),dur=1400;
   (function f(t){const k=Math.min(1,(t-t0)/dur);const v=Math.round(to*(1-Math.pow(1-k,3)));el.textContent=v+(k===1?suf:'');if(k<1)requestAnimationFrame(f)})(t0)}
 
+let FS=1;
 const NS='http://www.w3.org/2000/svg';
 function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
 function txt(parent,x,y,s,size,fill,anchor='middle',weight=600){const t=el('text',{x,y,'font-size':size,fill,'text-anchor':anchor,'font-weight':weight,'font-family':'Avenir Next, Avenir, Segoe UI, sans-serif'},parent);t.textContent=s;return t}
@@ -447,7 +603,7 @@ function stroke(line,len,delay){line.style.strokeDasharray=len;line.style.stroke
 
 /* slide 2: people in many roles, each with their own lens */
 function drawNet(){
-  const svg=document.getElementById('net');svg.innerHTML='';
+  const svg=document.getElementById('net');svg.innerHTML='';svg.setAttribute('viewBox',FS>1?'-70 -30 1040 750':'0 0 900 660');
   const cx=450,cy=330;
   const people=[['PI',450,70,'#FF8A9C'],['Lab manager',760,170,'#9FD0FF'],['Policy advisor',800,420,'#FFD58A'],['Funder',600,600,'#9FE3B8'],
     ['Company',300,600,'#C9A7FF'],['PhD researcher',100,430,'#FFB38A'],['Director',120,170,'#8AF0E6']];
@@ -455,15 +611,15 @@ function drawNet(){
   people.forEach((p,i)=>people.forEach((q,j)=>{if(j>i&&(j-i===1||j-i===3||(i===0&&j===4))){const l=el('line',{x1:p[1],y1:p[2],x2:q[1],y2:q[2],stroke:'rgba(255,255,255,.22)','stroke-width':2},g);stroke(l,Math.hypot(p[1]-q[1],p[2]-q[2]),.3+i*.08)}}));
   people.forEach((p,i)=>{const l=el('line',{x1:cx,y1:cy,x2:p[1],y2:p[2],stroke:p[3],'stroke-opacity':.55,'stroke-width':2.5},g);stroke(l,Math.hypot(p[1]-cx,p[2]-cy),.1+i*.1)});
   const core=el('g',{},svg);
-  el('circle',{cx,cy,r:92,fill:'rgba(255,255,255,.10)',stroke:'rgba(255,255,255,.55)','stroke-width':1.5},core);
-  txt(core,cx,cy-8,'Research',26,'#fff');txt(core,cx,cy+24,'intelligence',26,'#fff');
+  el('circle',{cx,cy,r:92*(FS>1?1.25:1),fill:'rgba(255,255,255,.10)',stroke:'rgba(255,255,255,.55)','stroke-width':1.5},core);
+  txt(core,cx,cy-8*FS,'Research',26*FS,'#fff');txt(core,cx,cy+24*FS,'intelligence',26*FS,'#fff');
   people.forEach((p,i)=>{
     const n=el('g',{style:`opacity:0;transform:scale(.6);transform-origin:${p[1]}px ${p[2]}px;transition:all .7s ${.5+i*.12}s cubic-bezier(.2,.7,.2,1)`},svg);
     const lens=el('circle',{cx:p[1],cy:p[2],r:46,fill:'none',stroke:p[3],'stroke-width':3,'stroke-dasharray':'14 10'},n);
     lens.style.transformOrigin=`${p[1]}px ${p[2]}px`;lens.style.animation=`spin ${14+i*2}s linear infinite ${i%2?'reverse':''}`;
     el('circle',{cx:p[1],cy:p[2],r:32,fill:'rgba(24,18,44,.75)',stroke:'rgba(255,255,255,.6)','stroke-width':1.5},n);
     el('circle',{cx:p[1],cy:p[2]-6,r:8,fill:'#fff'},n);el('path',{d:`M${p[1]-13} ${p[2]+17}c3-10 8-13 13-13s10 3 13 13`,fill:'#fff'},n);
-    txt(n,p[1],p[2]+(p[2]>500?-62:74),p[0],22,'#fff');
+    txt(n,p[1],p[2]+(FS>1?82:(p[2]>500?-62:74)),p[0],22*FS,'#fff');
     requestAnimationFrame(()=>requestAnimationFrame(()=>{n.style.opacity=1;n.style.transform='scale(1)'}));
   });
 }
@@ -543,9 +699,10 @@ function openNotes(){
   w.document.body.appendChild(s);
 }
 
-const start=parseInt(location.hash.slice(1))||1;show(start-1);
-addEventListener('hashchange',()=>{const h=parseInt(location.hash.slice(1));if(h&&h-1!==cur)show(h-1)});
-setTimeout(()=>document.getElementById('hint').style.opacity=0,6000);
+const start=parseInt(location.hash.slice(1))||1;cur=Math.max(0,Math.min(slides.length-1,start-1));applyMode();
+if(READ&&start>1)setTimeout(()=>scrollToSlide(start-1),50);
+addEventListener('hashchange',()=>{const h=parseInt(location.hash.slice(1));if(!h||h-1===cur)return;READ?scrollToSlide(h-1):show(h-1)});
+setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity=0},6000);
 })();
 </script>
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
